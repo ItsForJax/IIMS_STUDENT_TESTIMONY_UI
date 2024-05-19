@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">IIMS_STUDENT_TESTIMONY_UI</string>
+    <string name="common_length_for_names">Common Length For Names</string>
+    <string name="date_time">11/11/2000 • HH:MM</string>
+    <string name="lorem_1p">Aliquam eu euismod nibh. Maecenas sed finibus nunc. Praesent scelerisque urna vel maximus tincidunt. In sit amet feugiat urna, id consectetur lorem. Etiam pharetra odio orci, et malesuada lectus aliquet at. Nulla sed lacus tristique, suscipit nisl non, sollicitudin enim. Morbi pharetra luctus risus a ultrices. Ut a pharetra libero, at finibus felis. Nullam sapien quam, faucibus vel arcu vel, bibendum sollicitudin turpis. Duis lorem metus, interdum id sapien id, convallis accumsan dolor.</string>
+</resources>
