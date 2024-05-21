@@ -56,10 +56,10 @@
 
         <ImageView
             android:id="@+id/post_options"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:layout_marginStart="4dp"
+            android:layout_width="25dp"
+            android:layout_height="15dp"
             android:layout_gravity="center_vertical"
+            android:layout_marginStart="4dp"
             android:src="@drawable/three_dots" />
 
     </LinearLayout>
@@ -74,14 +74,14 @@
             android:id="@+id/post_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
-            android:textColor="@color/black"
-            android:text="@string/lorem_1p"
-            android:fontFamily="@font/poppins_regular"
             android:layout_marginHorizontal="8dp"
             android:layout_marginBottom="8dp"
-            tools:ignore="SmallSp"
-            android:includeFontPadding="false"/>
+            android:fontFamily="@font/poppins_regular"
+            android:includeFontPadding="false"
+            android:text="@string/lorem_1p"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            tools:ignore="SmallSp" />
 
         <ImageView
             android:id="@+id/post_img"
