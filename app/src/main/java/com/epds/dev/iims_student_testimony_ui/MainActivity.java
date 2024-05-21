@@ -1,8 +1,10 @@
 package com.epds.dev.iims_student_testimony_ui;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.WindowManager;
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements ChatAdapter.OnIte
     private RecyclerView recyclerView;
     private SwipeRefreshLayout swipeRefreshLayout;
     private PostAdapter postAdapter;
-
+    private Dialog dialog;
     String lastChosen;
     int currentIndex = 0;
     ArrayList<ChatItem> chatItems;
@@ -70,19 +72,20 @@ public class MainActivity extends AppCompatActivity implements ChatAdapter.OnIte
         swipeRefreshLayout.setOnRefreshListener(this::refreshItems);
 
         chatItems = new ArrayList<>();
-        chatItems.add(new ChatItem.Bot(getString(R.string.allowance_type)));
-        chatItems.add(new ChatItem.Options(Arrays.asList("1", "2", "3", "4", "5", "6", "7")));
         chatBotAdapter = new ChatAdapter(this, chatItems, chatBotRecyclerView, this, this, this); // Create your adapter
 
         ImageButton openChatBot = findViewById(R.id.img_btn);
         openChatBot.setOnClickListener(v -> {
+            chatItems.add(new ChatItem.Bot(getString(R.string.allowance_type)));
+            chatItems.add(new ChatItem.Options(Arrays.asList("1", "2", "3", "4", "5", "6", "7")));
+            chatBotAdapter.notifyItemInserted(chatItems.size() - 1);
             showDialog();
         });
 
     }
 
     private void showDialog() {
-        Dialog dialog = new Dialog(this);
+        dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_chat);
 
         // Get the device's screen size
@@ -121,6 +124,20 @@ public class MainActivity extends AppCompatActivity implements ChatAdapter.OnIte
             // Handle submit button click
             // Perform any actions needed
             dialog.dismiss();
+        });
+
+        dialog.setOnDismissListener(dialogInterface -> {
+            chatItems.clear();
+            chatBotAdapter.notifyDataSetChanged();
+            currentIndex = 0;
+            lastChosen = null;
+        });
+
+        dialog.setOnCancelListener(dialogInterface -> {
+            chatItems.clear();
+            chatBotAdapter.notifyDataSetChanged();
+            currentIndex = 0;
+            lastChosen = null;
         });
 
         // Show the dialog
@@ -188,6 +205,7 @@ public class MainActivity extends AppCompatActivity implements ChatAdapter.OnIte
         }
         boolean newInter = false;
         chatItems.add(new ChatItem.User("Selected: " + position));
+
         if (currentIndex == 0) {
             if (position.equals("1") && lastChosen == null) {
                 chatItems.add(new ChatItem.Bot("Have you received your STIPEND allowance?\n1. Yes\n2. No"));
@@ -288,6 +306,19 @@ public class MainActivity extends AppCompatActivity implements ChatAdapter.OnIte
                 chatItems.add(new ChatItem.Options(Arrays.asList("1", "2", "3", "4", "5", "6", "7")));
             } else if (position.equals("2")) {
                 chatItems.add(new ChatItem.Bot("Thank you for your time!"));
+                chatItems.add(new ChatItem.Bot("This will automatically close, Bye!"));
+                chatBotAdapter.notifyItemInserted(chatItems.size() - 1);
+                chatBotRecyclerView.smoothScrollToPosition(chatItems.size()-1);
+
+                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        chatItems.clear();
+                        chatBotAdapter.notifyDataSetChanged();
+                        dialog.dismiss();
+                    }
+                }, 2000);
+                return;
             }
         }
 
