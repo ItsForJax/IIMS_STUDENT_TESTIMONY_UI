@@ -16,7 +16,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:background="@color/light_gray"
+        android:gravity="center"
         app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/support_icon"/>
 
     </LinearLayout>
 
@@ -63,18 +69,19 @@
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/recycler_gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/recycler_gray"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+        app:layout_constraintVertical_bias="1.0">
 
         <!--    Recycler View for post-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/post_recycler"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-             />
+            android:layout_height="0dp" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
