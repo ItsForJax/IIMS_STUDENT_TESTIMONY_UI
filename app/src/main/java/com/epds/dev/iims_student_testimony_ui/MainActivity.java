@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
         recyclerView = findViewById(R.id.post_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        postAdapter = new PostAdapter(posts);
+        postAdapter = new PostAdapter(posts, this);
         recyclerView.setAdapter(postAdapter);
 
         swipeRefreshLayout.setOnRefreshListener(this::refreshItems);
